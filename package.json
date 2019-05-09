@@ -1,0 +1,20 @@
+{
+  "name": "final_challange_app",
+  "version": "1.0.0",
+  "description": "300 push up challange inspired",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js --ignore tests",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Ivan Zagrebelnyy",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "nodemon": "^1.19.0"
+  }
+}
