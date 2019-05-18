@@ -6,6 +6,7 @@ const Welcome = () => {
     <div>
       <h1>Welcome</h1>
       <Link to="/createchallange">CreateChallange</Link>
+      <br />
       <Link to="/startchallange">StartChallange</Link>
     </div>
   );
