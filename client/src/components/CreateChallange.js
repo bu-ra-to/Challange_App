@@ -1,30 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+// import { createChallangeName } from '../components/actions/actions';
 
-const showresults = values => {
-  console.log(values);
-};
-let handleError = ({ touched, error }) => {
-  if (touched && error) {
-    return (
-      <div className="error">
-        <div>{error}</div>
-      </div>
-    );
-  }
-};
-let handleChange = ({ input, label, meta }) => {
-  const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
-  return (
-    <div className={className}>
-      <label>{label}</label>
-      <input {...input} />
-      {/* {touched && (error && <span>{error}</span>)} */}
-      <div>{handleError(meta)}</div>
-      <br />
-    </div>
-  );
-};
 const validate = formValues => {
   const errors = {};
   if (!formValues.title) {
@@ -35,21 +12,52 @@ const validate = formValues => {
   }
   return errors;
 };
-let CreateChallangeForm = props => {
-  return (
-    <form onSubmit={props.handleSubmit(showresults)}>
-      <Field name="title" component={handleChange} label="Enter Challange" />
-      <Field
-        name="description"
-        component={handleChange}
-        label="Enter Daily Amount"
-      />
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
+class CreateChallangeForm extends React.Component {
+  handleError = ({ touched, error }) => {
+    if (touched && error) {
+      return (
+        <div className="error">
+          <div>{error}</div>
+        </div>
+      );
+    }
+  };
+  handleChange = ({ input, label, meta }) => {
+    const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <input {...input} />
+        {/* {touched && (error && <span>{error}</span>)} */}
+        <div>{this.handleError(meta)}</div>
+        <br />
+      </div>
+    );
+  };
+  passValuesToTheStore = values => {
+    this.props.onSubmit(values);
+  };
+  render() {
+    return (
+      <form onSubmit={this.props.handleSubmit(this.passValuesToTheStore)}>
+        <Field
+          name="title"
+          component={this.handleChange}
+          label="Enter Challange"
+        />
+        <Field
+          name="description"
+          component={this.handleChange}
+          label="Enter Daily Amount"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    );
+  }
+}
 
 export default reduxForm({
   form: 'createForm',
-  validate
+  validate,
+  destroyOnUnmount: false
 })(CreateChallangeForm);

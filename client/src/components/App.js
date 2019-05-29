@@ -12,7 +12,7 @@ const App = () => {
         <Route exact path="/welcome" component={Welcome} />
         <Route exact path="/createchallange" component={CreateChallange} />
         <Route exact path="/startchallange" component={StartChallange} />
-        <Route path="/*">{Welcome}</Route>
+        {/* <Route path="/*">{Welcome}</Route> */}
       </Switch>
     </Router>
   );
